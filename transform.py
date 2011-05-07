@@ -7,11 +7,20 @@ ESCAPE = '\033'
 
 window = 0
 
-Triangle = [
-    [0.0, 1.0, 0.0],
-    [1.0, -1.0, 0.0],
-    [-1.0, -1.0, 0.0]
-    ]
+Triangle = []
+
+def load_rawfile(filename):
+    points = []
+
+    lines = open(filename).readlines()
+    for line in lines:
+        coord = line.strip().split(" ")
+        coord = map(float, coord)
+        points.append(coord[:3])
+        points.append(coord[3:6])
+        points.append(coord[6:])
+        
+    return points
 
 def DrawGLScene():
     global Triangle
@@ -79,6 +88,7 @@ def keyPressed(*args):
         sys.exit()
 
 def InitGL(Width, Height):
+    global Triangle
     glClearColor(0.0, 0.0, 0.0, 0.0)
     glClearDepth(1.0)
 
@@ -92,6 +102,7 @@ def InitGL(Width, Height):
     gluPerspective(45.0, float(Width)/float(Height), 0.1, 100.0)
     
     glMatrixMode(GL_MODELVIEW)
+    Triangle = load_rawfile("cube.raw")
 
 def main():
     global window
