@@ -102,7 +102,7 @@ def InitGL(Width, Height):
     gluPerspective(45.0, float(Width)/float(Height), 0.1, 100.0)
     
     glMatrixMode(GL_MODELVIEW)
-    Triangle = load_rawfile("cube.raw")
+    Triangle = load_rawfile("monkey.raw")
 
 def main():
     global window
